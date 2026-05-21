@@ -20,6 +20,7 @@ body {
   height: 572px;
   overflow: hidden;
   background: var(--bg);
+  position: relative;
 }
 
 /* ─── Typography ───────────────────────────────────────────── */
@@ -331,4 +332,58 @@ body {
   height: 24px;
   width: auto;
   display: block;
+}
+
+/* ─── 온보딩 가이드 오버레이 ───────────────────────────────── */
+.guide-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.guide-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.guide-dim-wrap {
+  position: absolute;
+  inset: 0;
+}
+
+.guide-dim {
+  position: absolute;
+  inset: 0;
+  background: var(--dim);
+  backdrop-filter: blur(5px);
+}
+
+.guide-noise {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  filter: url(#dim-noise);
+  opacity: 0.07;
+}
+
+/* 배너 가이드 - 화살표 */
+.guide-arrow-banner {
+  position: absolute;
+  left: 20px;
+  top: 261px;
+  width: 28px;
+  height: 51px;
+}
+
+/* 배너 가이드 - 말풍선 */
+.guide-box-banner {
+  position: absolute;
+  left: 50%;
+  top: 280px;
+  transform: translateX(-50%);
+  max-width: 288px;
 }

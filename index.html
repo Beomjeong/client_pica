@@ -236,5 +236,72 @@
     })();
   </script>
 
+  <!-- ─── 노이즈 SVG 필터 정의 ───────────────────────────────── -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden">
+    <defs>
+      <filter id="dim-noise" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="1 1" numOctaves="3" stitchTiles="stitch" result="noise" seed="8183"/>
+        <feColorMatrix in="noise" type="luminanceToAlpha" result="alphaNoise"/>
+        <feComponentTransfer in="alphaNoise" result="maskedNoise">
+          <feFuncA type="discrete" tableValues="0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
+        </feComponentTransfer>
+        <feFlood flood-color="rgba(0,0,0,0.25)" result="noiseColor"/>
+        <feComposite operator="in" in2="maskedNoise" in="noiseColor" result="coloredNoise"/>
+        <feMerge>
+          <feMergeNode in="SourceGraphic"/>
+          <feMergeNode in="coloredNoise"/>
+        </feMerge>
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- ─── 온보딩 가이드 오버레이 ──────────────────────────────── -->
+  <div class="guide-overlay" id="guideOverlay">
+    <div class="guide-dim-wrap" id="guideDimWrap">
+      <div class="guide-dim"></div>
+      <div class="guide-noise"></div>
+    </div>
+    <img class="guide-box  guide-box-banner"   src="assets/explainbox_banner.png"  alt="">
+    <img class="guide-arrow guide-arrow-banner" src="assets/explainarrow_banner.png" alt="">
+  </div>
+
+  <script>
+    // ─── 온보딩 가이드: 배너 영역 ─────────────────────────────
+    (function () {
+      const bannerWrap  = document.querySelector('.banner-wrap');
+      const overlay     = document.getElementById('guideOverlay');
+      const dimWrap     = document.getElementById('guideDimWrap');
+      const W = 320, H = 572;
+
+      function showGuide() {
+        const bodyRect   = document.body.getBoundingClientRect();
+        const bannerRect = bannerWrap.getBoundingClientRect();
+        const t = Math.round(bannerRect.top  - bodyRect.top);
+        const l = Math.round(bannerRect.left - bodyRect.left);
+        const w = Math.round(bannerRect.width);
+        const h = Math.round(bannerRect.height);
+        const r = 10; // 배너 border-radius
+
+        // 둥근 구멍: 반시계방향 rounded rect (sweep-flag=0)
+        const hole =
+          `M${l} ${t+r} ` +
+          `L${l} ${t+h-r} A${r} ${r} 0 0 0 ${l+r} ${t+h} ` +
+          `L${l+w-r} ${t+h} A${r} ${r} 0 0 0 ${l+w} ${t+h-r} ` +
+          `L${l+w} ${t+r} A${r} ${r} 0 0 0 ${l+w-r} ${t} ` +
+          `L${l+r} ${t} A${r} ${r} 0 0 0 ${l} ${t+r} Z`;
+
+        dimWrap.style.clipPath = `path('M0 0 L${W} 0 L${W} ${H} L0 ${H} Z ${hole}')`;
+        overlay.classList.add('active');
+      }
+
+      function hideGuide() {
+        overlay.classList.remove('active');
+      }
+
+      bannerWrap.addEventListener('mouseenter', showGuide);
+      bannerWrap.addEventListener('mouseleave', hideGuide);
+    })();
+  </script>
+
 </body>
 </html>
