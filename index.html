@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=320">
+  <title>Document</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Roboto:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 상단 설치 유도 문구 -->
+  <div class="notice-wrapper">
+    <div class="notice-box font-notice">
+      피카플레이 APP을 설치하시면 사용이 가능합니다.
+    </div>
+  </div>
+
+  <!-- 콘텐츠 영역 -->
+  <div class="content-area">
+
+    <!-- 롤링 배너 -->
+    <div class="banner-wrap">
+      <div class="banner-track" id="bannerTrack">
+        <img src="assets/rollingbanner_1.jpg"  class="banner-img" alt="">
+        <img src="assets/rollingbanner_2.jpg"  class="banner-img" alt="">
+        <img src="assets/rollingbanner_3.jpg"  class="banner-img" alt="">
+        <img src="assets/rollingbanner_4.jpg"  class="banner-img" alt="">
+        <img src="assets/rollingbanner_5.jpg"  class="banner-img" alt="">
+        <img src="assets/rollingbanner_6.jpg"  class="banner-img" alt="">
+        <img src="assets/rollingbanner_7.jpg"  class="banner-img" alt="">
+        <img src="assets/rollingbanner_8.jpg"  class="banner-img" alt="">
+        <img src="assets/rollingbanner_9.png"  class="banner-img" alt="">
+        <img src="assets/rollingbanner_10.jpg" class="banner-img" alt="">
+      </div>
+      <div class="banner-counter" id="bannerCounter">1/10 +</div>
+      <button class="banner-btn left"  id="bannerPrev"></button>
+      <button class="banner-btn right" id="bannerNext"></button>
+    </div>
+
+    <!-- 피카플레이 자산보유현황 박스 -->
+    <div class="asset-box">
+      <div class="asset-item">
+        <span class="asset-label font-subtitle">피카페이</span>
+        <span class="asset-value font-benefit">300,000</span>
+      </div>
+      <div class="asset-divider"></div>
+      <div class="asset-item">
+        <span class="asset-label font-subtitle">마일리지</span>
+        <span class="asset-value font-benefit">50,000</span>
+      </div>
+      <div class="asset-divider"></div>
+      <div class="asset-item">
+        <span class="asset-label font-subtitle">보유 쿠폰</span>
+        <span class="asset-value font-benefit">2</span>
+      </div>
+    </div>
+
+    <!-- MY PC방 + QR 행 -->
+    <div class="mypc-row">
+      <div class="mypc-card">
+        <div class="mypc-content">
+          <div class="mypc-title-section">
+            <div class="mypc-header-row">
+              <div class="mypc-label-group">
+                <span class="font-subtitle" style="color: var(--text-main-dark)">MY PC방</span>
+                <img src="assets/label_paynow.svg" class="label-paynow" alt="바로결제">
+              </div>
+              <span class="font-mypc-day" style="color: var(--text-awai-grey)">1일 전</span>
+            </div>
+            <p class="font-title" style="color: var(--text-main-dark)">미디어웹 신림점 PC방</p>
+          </div>
+          <div class="timeleft-row">
+            <div class="timeleft-label-group">
+              <img src="assets/icon_timer.svg" class="icon-timer" alt="">
+              <span class="font-subtitle" style="color: var(--text-sub-grey)">잔여시간</span>
+            </div>
+            <span class="font-timeleft" style="color: var(--picaorange)">30:23</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="qr-card">
+        <img src="assets/qr_picaplay.svg" class="qr-img" alt="QR코드">
+        <p class="qr-text">QR스캔하고<br>피카플레이 다운받기</p>
+      </div>
+    </div>
+
+    <!-- 하단 3카드 행 -->
+    <div class="icon-cards">
+      <div class="icon-card">
+        <div class="icon-card-title">
+          <p class="font-title"    style="color: var(--text-main-dark)">게임하고</p>
+          <div class="font-subtitle" style="color: var(--text-main-dark)">
+            <p>마일리지</p>
+            <p>받자!</p>
+          </div>
+        </div>
+        <div class="icon-card-icon">
+          <img src="assets/icon_milage.svg" alt="">
+        </div>
+      </div>
+
+      <div class="icon-card">
+        <div class="icon-card-title">
+          <p class="font-title"    style="color: var(--text-main-dark)">무료충전소</p>
+          <div class="font-subtitle" style="color: var(--text-main-dark)">
+            <p>마일리지</p>
+            <p>충전</p>
+          </div>
+        </div>
+        <div class="icon-card-icon">
+          <img src="assets/icon_coin_charge.svg" alt="">
+        </div>
+      </div>
+
+      <div class="icon-card">
+        <div class="icon-card-title">
+          <p class="font-title" style="color: var(--text-main-dark)">문상교환소</p>
+        </div>
+        <div class="icon-card-icon">
+          <img src="assets/icon_shop.svg" alt="">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const track   = document.getElementById('bannerTrack');
+    const counter = document.getElementById('bannerCounter');
+    const total   = 10;
+    let current   = 0;
+    let timer;
+
+    function goTo(index) {
+      current = (index + total) % total;
+      track.style.transform = `translateX(-${current * 288}px)`;
+      counter.textContent   = `${current + 1}/${total} +`;
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      timer = setInterval(() => goTo(current + 1), 3000);
+    }
+
+    document.getElementById('bannerPrev').addEventListener('click', () => { goTo(current - 1); resetTimer(); });
+    document.getElementById('bannerNext').addEventListener('click', () => { goTo(current + 1); resetTimer(); });
+
+    resetTimer();
+  </script>
+
+</body>
+</html>
