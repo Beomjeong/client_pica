@@ -186,6 +186,16 @@
       updateCounter(current);
       resetTimer();
 
+      // 백그라운드 복귀 시 누적 콜백 방지
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          clearInterval(timer);
+        } else {
+          setPos(current, false);
+          resetTimer();
+        }
+      });
+
       // ─── 드래그 / 스와이프 ────────────────────────────────
       let isDragging    = false;
       let didDrag       = false;
