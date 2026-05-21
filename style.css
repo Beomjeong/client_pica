@@ -467,3 +467,68 @@ body {
     opacity   0.25s ease 0.8s,
     transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.9s;
 }
+
+/* ─── MY PC방 + QR Guide ────────────────────────────────────── */
+/* 위쪽 화살표: 0.3s 지연 */
+.guide-arrow-mypc-up {
+  position: absolute;
+  left: 33px;
+  top: 323px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+.guide-overlay.mypc-active .guide-arrow-mypc-up {
+  opacity: 1;
+  transition: opacity 0.25s ease 0.3s;
+}
+
+/* 위쪽 말풍선: 0.5s 지연, 스프링 — bottom을 기준점으로 위로 펼쳐짐 */
+.guide-box-limittime-01 {
+  position: absolute;
+  left: 50%;
+  bottom: calc(50% - 27px);   /* bottom edge at y=313px (피그마 기준) */
+  max-width: 288px;
+  opacity: 0;
+  transform: translateX(-50%) scale(0.4);
+  transform-origin: center bottom;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.guide-overlay.mypc-active .guide-box-limittime-01 {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+  transition:
+    opacity   0.25s ease 0.5s,
+    transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s;
+}
+
+/* 아래쪽 화살표: 0.7s 지연 */
+.guide-arrow-mypc-down {
+  position: absolute;
+  left: 226px;
+  top: 453px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+.guide-overlay.mypc-active .guide-arrow-mypc-down {
+  opacity: 1;
+  transition: opacity 0.25s ease 0.7s;
+}
+
+/* 아래쪽 말풍선: 0.9s 지연, 스프링 — 위(화살표)에서 아래로 펼쳐짐 */
+.guide-box-qrscan-01 {
+  position: absolute;
+  left: 50%;
+  top: 469px;
+  max-width: 288px;
+  opacity: 0;
+  transform: translateX(-50%) scale(0.4);
+  transform-origin: center top;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.guide-overlay.mypc-active .guide-box-qrscan-01 {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+  transition:
+    opacity   0.25s ease 0.9s,
+    transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.9s;
+}

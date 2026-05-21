@@ -269,6 +269,11 @@
     <img class="guide-arrow guide-arrow-asset-up"   src="assets/explainarrow_up.png"           alt="">
     <img class="guide-box   guide-box-benefit-02"   src="assets/explainbox_benefit_02.png"    alt="">
     <img class="guide-arrow guide-arrow-asset-down" src="assets/explainarrow_down.png"         alt="">
+    <!-- MY PC방 + QR 가이드 -->
+    <img class="guide-box   guide-box-limittime-01" src="assets/explainbox_limittime_01.png"  alt="">
+    <img class="guide-arrow guide-arrow-mypc-up"    src="assets/explainarrow_up.png"           alt="">
+    <img class="guide-box   guide-box-qrscan-01"    src="assets/explainbox_qrscan_01.png"     alt="">
+    <img class="guide-arrow guide-arrow-mypc-down"  src="assets/explainarrow_down.png"         alt="">
   </div>
 
   <script>
@@ -349,6 +354,44 @@
 
       assetBox.addEventListener('mouseenter', showAssetGuide);
       assetBox.addEventListener('mouseleave', hideAssetGuide);
+    })();
+  </script>
+
+  <script>
+    // ─── 온보딩 가이드: MY PC방 + QR 영역 ──────────────────────
+    (function () {
+      const mypcRow = document.querySelector('.mypc-row');
+      const overlay = document.getElementById('guideOverlay');
+      const dimWrap = document.getElementById('guideDimWrap');
+      const W = 320, H = 572;
+
+      function showMypcGuide() {
+        const bodyRect = document.body.getBoundingClientRect();
+        const rowRect  = mypcRow.getBoundingClientRect();
+
+        const t = Math.round(rowRect.top  - bodyRect.top);
+        const l = Math.round(rowRect.left - bodyRect.left);
+        const w = Math.round(rowRect.width);
+        const h = Math.round(rowRect.height);
+        const r = 8;
+
+        const hole =
+          `M${l} ${t+r} ` +
+          `L${l} ${t+h-r} A${r} ${r} 0 0 0 ${l+r} ${t+h} ` +
+          `L${l+w-r} ${t+h} A${r} ${r} 0 0 0 ${l+w} ${t+h-r} ` +
+          `L${l+w} ${t+r} A${r} ${r} 0 0 0 ${l+w-r} ${t} ` +
+          `L${l+r} ${t} A${r} ${r} 0 0 0 ${l} ${t+r} Z`;
+
+        dimWrap.style.clipPath = `path('M0 0 L${W} 0 L${W} ${H} L0 ${H} Z ${hole}')`;
+        overlay.classList.add('active', 'mypc-active');
+      }
+
+      function hideMypcGuide() {
+        overlay.classList.remove('active', 'mypc-active');
+      }
+
+      mypcRow.addEventListener('mouseenter', showMypcGuide);
+      mypcRow.addEventListener('mouseleave', hideMypcGuide);
     })();
   </script>
 
