@@ -376,12 +376,12 @@ body {
   top: 261px;
   width: 28px;
   height: 51px;
-  opacity: 0;
-  transition: opacity 0.15s ease;         /* 숨길 때: 빠르게 */
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 0.15s ease;
 }
 .guide-overlay.banner-active .guide-arrow-banner {
-  opacity: 1;
-  transition: opacity 0.25s ease 0.3s;   /* 나타날 때: 0.3s delay */
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 0.4s ease 0.3s;
 }
 
 /* 말풍선: 마지막 등장, 쫀득한 스프링 */
@@ -409,12 +409,12 @@ body {
   position: absolute;
   left: 33px;
   top: 259px;
-  opacity: 0;
-  transition: opacity 0.15s ease;
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.15s ease;
 }
 .guide-overlay.asset-active .guide-arrow-asset-up {
-  opacity: 1;
-  transition: opacity 0.25s ease 0.3s;
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 0.4s ease 0.3s;
 }
 
 /* 위쪽 말풍선: 0.4s 지연, 스프링 — 아래(화살표)에서 위로 펼쳐짐 */
@@ -441,12 +441,12 @@ body {
   position: absolute;
   left: 176px;
   top: 341px;
-  opacity: 0;
-  transition: opacity 0.15s ease;
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 0.15s ease;
 }
 .guide-overlay.asset-active .guide-arrow-asset-down {
-  opacity: 1;
-  transition: opacity 0.25s ease 0.6s;
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 0.4s ease 0.6s;
 }
 
 /* 아래쪽 말풍선: 0.8s 지연, 스프링 — 위(화살표)에서 아래로 펼쳐짐 */
@@ -474,12 +474,12 @@ body {
   position: absolute;
   left: 33px;
   top: 327px;
-  opacity: 0;
-  transition: opacity 0.15s ease;
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.15s ease;
 }
 .guide-overlay.mypc-active .guide-arrow-mypc-up {
-  opacity: 1;
-  transition: opacity 0.25s ease 0.3s;
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 0.4s ease 0.3s;
 }
 
 /* 위쪽 말풍선: 0.5s 지연, 스프링 — bottom을 기준점으로 위로 펼쳐짐 */
@@ -507,12 +507,12 @@ body {
   position: absolute;
   left: 226px;
   top: 457px;
-  opacity: 0;
-  transition: opacity 0.15s ease;
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 0.15s ease;
 }
 .guide-overlay.mypc-active .guide-arrow-mypc-down {
-  opacity: 1;
-  transition: opacity 0.25s ease 0.7s;
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 0.4s ease 0.7s;
 }
 
 /* 아래쪽 말풍선: 0.9s 지연, 스프링 — 위(화살표)에서 아래로 펼쳐짐 */
