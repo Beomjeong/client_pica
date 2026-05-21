@@ -110,6 +110,12 @@ body {
   border-radius: 10px;
   overflow: hidden;
   flex-shrink: 0;
+  cursor: grab;
+  user-select: none;
+}
+
+.banner-wrap.is-dragging {
+  cursor: grabbing;
 }
 
 .banner-track {
@@ -118,11 +124,17 @@ body {
   transition: transform 0.4s ease;
 }
 
+.banner-link {
+  display: block;
+  flex-shrink: 0;
+  line-height: 0;
+}
+
 .banner-img {
   width: 288px;
   height: 216px;
   object-fit: cover;
-  flex-shrink: 0;
+  display: block;
 }
 
 .banner-counter {
@@ -138,18 +150,6 @@ body {
   border-radius: 12px;
 }
 
-.banner-btn {
-  position: absolute;
-  top: 53px;
-  width: 54px;
-  height: 111px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-}
-.banner-btn.left  { left: 0; }
-.banner-btn.right { right: 0; }
 
 /* ─── Asset Box ────────────────────────────────────────────── */
 .asset-box {
