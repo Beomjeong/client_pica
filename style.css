@@ -573,3 +573,38 @@ body {
     opacity   0.25s ease 0.7s,
     transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.7s;
 }
+
+/* ─── 첫 화면 팝업 오버레이 ───────────────────────────────────── */
+.firstview-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 300;
+  cursor: pointer;
+  transition: opacity 0.4s ease;
+}
+
+.firstview-dim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.firstview-lottie-wrap {
+  position: absolute;
+  top: 195px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.firstview-txt {
+  position: absolute;
+  top: 263px;
+  left: 50%;
+  width: 153px;
+  height: 34px;
+  transform: translateX(-50%);
+  display: block;
+}

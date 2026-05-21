@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Roboto:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.14/dist/dotlottie-wc.js" type="module"></script>
 </head>
 <body>
 
@@ -448,6 +449,31 @@
 
       iconCards.addEventListener('mouseenter', showIconGuide);
       iconCards.addEventListener('mouseleave', hideIconGuide);
+    })();
+  </script>
+
+  <!-- ─── 첫 화면 팝업 오버레이 ─────────────────────────────── -->
+  <div id="firstviewOverlay" class="firstview-overlay">
+    <div class="firstview-dim"></div>
+    <div class="firstview-lottie-wrap">
+      <dotlottie-wc
+        src="https://lottie.host/b1f7c53f-1cb1-462a-a22c-ddcaff01f2ca/dOCb6RCwJ7.lottie"
+        style="width: 120px; height: auto"
+        autoplay
+        loop
+      ></dotlottie-wc>
+    </div>
+    <img class="firstview-txt" src="assets/firstview_txt.svg" alt="">
+  </div>
+
+  <script>
+    (function () {
+      const overlay = document.getElementById('firstviewOverlay');
+      overlay.addEventListener('click', () => {
+        overlay.style.opacity = '0';
+        overlay.style.pointerEvents = 'none';
+        overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
+      });
     })();
   </script>
 
