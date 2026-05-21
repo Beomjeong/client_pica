@@ -369,24 +369,26 @@
       const dimWrap = document.getElementById('guideDimWrap');
       const W = 320, H = 572;
 
-      function showMypcGuide() {
-        const bodyRect = document.body.getBoundingClientRect();
-        const rowRect  = mypcRow.getBoundingClientRect();
-
-        const t = Math.round(rowRect.top  - bodyRect.top);
-        const l = Math.round(rowRect.left - bodyRect.left);
-        const w = Math.round(rowRect.width);
-        const h = Math.round(rowRect.height);
-        const r = 8;
-
-        const hole =
+      function makeHole(rect, bodyRect, r) {
+        const t = Math.round(rect.top  - bodyRect.top);
+        const l = Math.round(rect.left - bodyRect.left);
+        const w = Math.round(rect.width);
+        const h = Math.round(rect.height);
+        return (
           `M${l} ${t+r} ` +
           `L${l} ${t+h-r} A${r} ${r} 0 0 0 ${l+r} ${t+h} ` +
           `L${l+w-r} ${t+h} A${r} ${r} 0 0 0 ${l+w} ${t+h-r} ` +
           `L${l+w} ${t+r} A${r} ${r} 0 0 0 ${l+w-r} ${t} ` +
-          `L${l+r} ${t} A${r} ${r} 0 0 0 ${l} ${t+r} Z`;
+          `L${l+r} ${t} A${r} ${r} 0 0 0 ${l} ${t+r} Z`
+        );
+      }
 
-        dimWrap.style.clipPath = `path('M0 0 L${W} 0 L${W} ${H} L0 ${H} Z ${hole}')`;
+      function showMypcGuide() {
+        const bodyRect = document.body.getBoundingClientRect();
+        const hole1 = makeHole(mypcRow.querySelector('.mypc-card').getBoundingClientRect(), bodyRect, 8);
+        const hole2 = makeHole(mypcRow.querySelector('.qr-card').getBoundingClientRect(),  bodyRect, 8);
+
+        dimWrap.style.clipPath = `path('M0 0 L${W} 0 L${W} ${H} L0 ${H} Z ${hole1} ${hole2}')`;
         overlay.classList.add('active', 'mypc-active');
       }
 
@@ -408,23 +410,25 @@
       const W = 320, H = 572;
 
       function showIconGuide() {
-        const bodyRect  = document.body.getBoundingClientRect();
-        const cardsRect = iconCards.getBoundingClientRect();
+        const bodyRect = document.body.getBoundingClientRect();
+        const cards    = iconCards.querySelectorAll('.icon-card');
+        const holes    = Array.from(cards).map(c => {
+          const rect = c.getBoundingClientRect();
+          const t = Math.round(rect.top  - bodyRect.top);
+          const l = Math.round(rect.left - bodyRect.left);
+          const w = Math.round(rect.width);
+          const h = Math.round(rect.height);
+          const r = 8;
+          return (
+            `M${l} ${t+r} ` +
+            `L${l} ${t+h-r} A${r} ${r} 0 0 0 ${l+r} ${t+h} ` +
+            `L${l+w-r} ${t+h} A${r} ${r} 0 0 0 ${l+w} ${t+h-r} ` +
+            `L${l+w} ${t+r} A${r} ${r} 0 0 0 ${l+w-r} ${t} ` +
+            `L${l+r} ${t} A${r} ${r} 0 0 0 ${l} ${t+r} Z`
+          );
+        }).join(' ');
 
-        const t = Math.round(cardsRect.top  - bodyRect.top);
-        const l = Math.round(cardsRect.left - bodyRect.left);
-        const w = Math.round(cardsRect.width);
-        const h = Math.round(cardsRect.height);
-        const r = 8;
-
-        const hole =
-          `M${l} ${t+r} ` +
-          `L${l} ${t+h-r} A${r} ${r} 0 0 0 ${l+r} ${t+h} ` +
-          `L${l+w-r} ${t+h} A${r} ${r} 0 0 0 ${l+w} ${t+h-r} ` +
-          `L${l+w} ${t+r} A${r} ${r} 0 0 0 ${l+w-r} ${t} ` +
-          `L${l+r} ${t} A${r} ${r} 0 0 0 ${l} ${t+r} Z`;
-
-        dimWrap.style.clipPath = `path('M0 0 L${W} 0 L${W} ${H} L0 ${H} Z ${hole}')`;
+        dimWrap.style.clipPath = `path('M0 0 L${W} 0 L${W} ${H} L0 ${H} Z ${holes}')`;
         overlay.classList.add('active', 'icon-active');
       }
 
