@@ -533,3 +533,43 @@ body {
     opacity   0.25s ease 0.9s,
     transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.9s;
 }
+
+/* ─── Icon Cards Guide ─────────────────────────────────────── */
+/* 공통: 카드 바로 위에 bottom 고정, center bottom에서 위로 스프링 */
+.guide-box-milage-01,
+.guide-box-milage-02,
+.guide-box-milage-03 {
+  position: absolute;
+  bottom: 103px;        /* icon-cards 상단(y≈469)에 맞춤 */
+  width: 90px;
+  opacity: 0;
+  transform: scale(0.4);
+  transform-origin: center bottom;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.guide-box-milage-01 { left: 16px; }
+.guide-box-milage-02 { left: 115px; }
+.guide-box-milage-03 { left: 214px; }
+
+/* 왼쪽부터 순차 등장 */
+.guide-overlay.icon-active .guide-box-milage-01 {
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity   0.25s ease 0.3s,
+    transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s;
+}
+.guide-overlay.icon-active .guide-box-milage-02 {
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity   0.25s ease 0.5s,
+    transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s;
+}
+.guide-overlay.icon-active .guide-box-milage-03 {
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity   0.25s ease 0.7s,
+    transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.7s;
+}
