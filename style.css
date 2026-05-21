@@ -111,13 +111,26 @@ body {
   border-radius: 10px;
   overflow: hidden;
   flex-shrink: 0;
-  cursor: grab;
-  user-select: none;
 }
 
-.banner-wrap.is-dragging {
-  cursor: grabbing;
+.banner-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 10;
+  line-height: 0;
 }
+.banner-arrow img {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+.banner-arrow-left  { left: 8px; }
+.banner-arrow-right { right: 8px; }
 
 .banner-track {
   display: flex;
