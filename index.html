@@ -45,6 +45,8 @@
         <a class="banner-link" href="https://m.itemmania.com/event/event_ing/e201125_picaplay/?utm_source=picapaly&utm_medium=cpa&utm_campaign=join&utm_term=main&utm_content=mo_brand" target="_blank"><img src="assets/rollingbanner_10.jpg" class="banner-img" alt=""></a>
       </div>
       <div class="banner-counter" id="bannerCounter">1/10 +</div>
+      <button class="banner-arrow banner-arrow-left"  id="bannerPrev"><img src="assets/cirlclearrow_left.svg"  alt="이전"></button>
+      <button class="banner-arrow banner-arrow-right" id="bannerNext"><img src="assets/cirlclearrow_right.svg" alt="다음"></button>
     </div>
 
     <!-- 피카플레이 자산보유현황 박스 -->
@@ -139,10 +141,8 @@
     (function () {
       const track   = document.getElementById('bannerTrack');
       const counter = document.getElementById('bannerCounter');
-      const wrap    = document.querySelector('.banner-wrap');
       const SLIDE_W = 288;
       const TOTAL   = 10;
-      const THRESH  = 50;
 
       // 앞뒤에 클론 삽입: [clone_last, 1~10, clone_first]
       const links      = Array.from(track.querySelectorAll('.banner-link'));
@@ -151,7 +151,7 @@
       track.appendChild(firstClone);
       track.insertBefore(lastClone, links[0]);
 
-      let current = 1; // 실제 첫 슬라이드 위치
+      let current = 1;
       let timer;
 
       function setPos(index, animate) {
@@ -205,53 +205,15 @@
         }
       });
 
-      // ─── 드래그 / 스와이프 ────────────────────────────────
-      let isDragging    = false;
-      let didDrag       = false;
-      let startX        = 0;
-      let baseTranslate = 0;
-
-      function onStart(x) {
-        isDragging    = true;
-        didDrag       = false;
-        startX        = x;
-        baseTranslate = -current * SLIDE_W;
-        track.style.transition = 'none';
-        wrap.classList.add('is-dragging');
-        clearInterval(timer);
-      }
-
-      function onMove(x) {
-        if (!isDragging) return;
-        if (Math.abs(x - startX) > 5) didDrag = true;
-        track.style.transform = `translateX(${baseTranslate + (x - startX)}px)`;
-      }
-
-      function onEnd(x) {
-        if (!isDragging) return;
-        isDragging = false;
-        wrap.classList.remove('is-dragging');
-        const diff = x - startX;
-        if      (diff < -THRESH) goTo(current + 1);
-        else if (diff >  THRESH) goTo(current - 1);
-        else setPos(current, true);
+      // ─── 화살표 클릭 ─────────────────────────────────────
+      document.getElementById('bannerPrev').addEventListener('click', () => {
+        goTo(current - 1);
         resetTimer();
-      }
-
-      // 드래그 후 클릭 이벤트로 링크 열리는 것 방지
-      wrap.addEventListener('click', e => {
-        if (didDrag) e.preventDefault();
-      }, true);
-
-      wrap.addEventListener('mousedown',  e => onStart(e.clientX));
-      window.addEventListener('mousemove', e => onMove(e.clientX));
-      window.addEventListener('mouseup',   e => onEnd(e.clientX));
-
-      wrap.addEventListener('touchstart', e => onStart(e.touches[0].clientX),       { passive: true });
-      wrap.addEventListener('touchmove',  e => onMove(e.touches[0].clientX),        { passive: true });
-      wrap.addEventListener('touchend',   e => onEnd(e.changedTouches[0].clientX));
-
-      track.addEventListener('dragstart', e => e.preventDefault());
+      });
+      document.getElementById('bannerNext').addEventListener('click', () => {
+        goTo(current + 1);
+        resetTimer();
+      });
     })();
   </script>
 
