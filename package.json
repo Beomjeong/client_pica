@@ -6,11 +6,15 @@
   "type": "commonjs",
   "scripts": {
     "start": "node script.js",
-    "dev": "serve ."
+    "dev": "serve .",
+    "deploy": "gh-pages -d . --src \"{index.html,style.css,assets/**}\" --dotfiles"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "serve": "^14.2.6"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }
