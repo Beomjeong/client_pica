@@ -261,8 +261,14 @@
       <div class="guide-dim"></div>
       <div class="guide-noise"></div>
     </div>
-    <img class="guide-box  guide-box-banner"   src="assets/explainbox_banner.png"  alt="">
-    <img class="guide-arrow guide-arrow-banner" src="assets/explainarrow_banner.png" alt="">
+    <!-- 배너 가이드 -->
+    <img class="guide-box  guide-box-banner"        src="assets/explainbox_banner.png"       alt="">
+    <img class="guide-arrow guide-arrow-banner"      src="assets/explainarrow_banner.png"      alt="">
+    <!-- 자산보유현황 가이드 -->
+    <img class="guide-box   guide-box-benefit-01"   src="assets/explainbox_benefit_01.png"    alt="">
+    <img class="guide-arrow guide-arrow-asset-up"   src="assets/explainarrow_up.png"           alt="">
+    <img class="guide-arrow guide-arrow-asset-down" src="assets/explainarrow_down.png"         alt="">
+    <img class="guide-box   guide-box-benefit-02"   src="assets/explainbox_benefit_02.png"    alt="">
   </div>
 
   <script>
@@ -291,15 +297,58 @@
           `L${l+r} ${t} A${r} ${r} 0 0 0 ${l} ${t+r} Z`;
 
         dimWrap.style.clipPath = `path('M0 0 L${W} 0 L${W} ${H} L0 ${H} Z ${hole}')`;
-        overlay.classList.add('active');
+        overlay.classList.add('active', 'banner-active');
       }
 
       function hideGuide() {
-        overlay.classList.remove('active');
+        overlay.classList.remove('active', 'banner-active');
       }
 
       bannerWrap.addEventListener('mouseenter', showGuide);
       bannerWrap.addEventListener('mouseleave', hideGuide);
+    })();
+  </script>
+
+  <script>
+    // ─── 온보딩 가이드: 자산보유현황 영역 ──────────────────────
+    (function () {
+      const assetBox   = document.querySelector('.asset-box');
+      const assetItems = document.querySelectorAll('.asset-item');
+      const overlay    = document.getElementById('guideOverlay');
+      const dimWrap    = document.getElementById('guideDimWrap');
+      const W = 320, H = 572;
+
+      function showAssetGuide() {
+        const bodyRect  = document.body.getBoundingClientRect();
+        const boxRect   = assetBox.getBoundingClientRect();
+        const item1Rect = assetItems[1].getBoundingClientRect(); // 마일리지 (두 번째)
+
+        const t = Math.round(boxRect.top  - bodyRect.top);
+        const l = Math.round(boxRect.left - bodyRect.left);
+        const h = Math.round(boxRect.height);
+        const r = 8; // asset-box border-radius
+
+        // 하이라이트 오른쪽 끝: 마일리지 오른쪽 + gap 절반(7px)
+        const rightEdge = Math.round(item1Rect.right - bodyRect.left) + 7;
+        const w = rightEdge - l;
+
+        const hole =
+          `M${l} ${t+r} ` +
+          `L${l} ${t+h-r} A${r} ${r} 0 0 0 ${l+r} ${t+h} ` +
+          `L${l+w-r} ${t+h} A${r} ${r} 0 0 0 ${l+w} ${t+h-r} ` +
+          `L${l+w} ${t+r} A${r} ${r} 0 0 0 ${l+w-r} ${t} ` +
+          `L${l+r} ${t} A${r} ${r} 0 0 0 ${l} ${t+r} Z`;
+
+        dimWrap.style.clipPath = `path('M0 0 L${W} 0 L${W} ${H} L0 ${H} Z ${hole}')`;
+        overlay.classList.add('active', 'asset-active');
+      }
+
+      function hideAssetGuide() {
+        overlay.classList.remove('active', 'asset-active');
+      }
+
+      assetBox.addEventListener('mouseenter', showAssetGuide);
+      assetBox.addEventListener('mouseleave', hideAssetGuide);
     })();
   </script>
 

@@ -379,7 +379,7 @@ body {
   opacity: 0;
   transition: opacity 0.15s ease;         /* 숨길 때: 빠르게 */
 }
-.guide-overlay.active .guide-arrow-banner {
+.guide-overlay.banner-active .guide-arrow-banner {
   opacity: 1;
   transition: opacity 0.25s ease 0.3s;   /* 나타날 때: 0.3s delay */
 }
@@ -395,10 +395,75 @@ body {
   transform-origin: center top;           /* 화살표 방향(위)에서 아래로 펼쳐짐 */
   transition: opacity 0.15s ease, transform 0.15s ease; /* 숨길 때: 빠르게 */
 }
-.guide-overlay.active .guide-box-banner {
+.guide-overlay.banner-active .guide-box-banner {
   opacity: 1;
   transform: translateX(-50%) scale(1);
   transition:                             /* 나타날 때: 0.5s delay, 스프링 */
     opacity   0.25s ease 0.4s,
     transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s;
+}
+
+/* ─── Asset Box Guide ──────────────────────────────────────── */
+/* 위쪽 화살표: dim 다음 0.3s 지연 */
+.guide-arrow-asset-up {
+  position: absolute;
+  left: 56px;
+  top: 254px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+.guide-overlay.asset-active .guide-arrow-asset-up {
+  opacity: 1;
+  transition: opacity 0.25s ease 0.3s;
+}
+
+/* 위쪽 말풍선: 0.5s 지연, 스프링 — 아래(화살표)에서 위로 펼쳐짐 */
+.guide-box-benefit-01 {
+  position: absolute;
+  left: 50%;
+  top: 148px;
+  max-width: 288px;
+  opacity: 0;
+  transform: translateX(-50%) scale(0.4);
+  transform-origin: center bottom;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.guide-overlay.asset-active .guide-box-benefit-01 {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+  transition:
+    opacity   0.25s ease 0.5s,
+    transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s;
+}
+
+/* 아래쪽 화살표: 0.7s 지연 */
+.guide-arrow-asset-down {
+  position: absolute;
+  left: 56px;
+  top: 352px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+.guide-overlay.asset-active .guide-arrow-asset-down {
+  opacity: 1;
+  transition: opacity 0.25s ease 0.7s;
+}
+
+/* 아래쪽 말풍선: 0.9s 지연, 스프링 — 위(화살표)에서 아래로 펼쳐짐 */
+.guide-box-benefit-02 {
+  position: absolute;
+  left: 50%;
+  top: 390px;
+  max-width: 288px;
+  opacity: 0;
+  transform: translateX(-50%) scale(0.4);
+  transform-origin: center top;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.guide-overlay.asset-active .guide-box-benefit-02 {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+  transition:
+    opacity   0.25s ease 0.9s,
+    transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.9s;
 }
