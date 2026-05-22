@@ -153,6 +153,7 @@
 
       let current = 1;
       let timer;
+      let isAnimating = false;
 
       function setPos(index, animate) {
         track.style.transition = animate ? 'transform 0.4s ease' : 'none';
@@ -170,10 +171,12 @@
         current = index;
         setPos(current, true);
         updateCounter(current);
+        isAnimating = true;
       }
 
       // 클론에 도달하면 조용히 실제 슬라이드로 점프
       track.addEventListener('transitionend', () => {
+        isAnimating = false;
         if (current === 0) {
           current = TOTAL;
           setPos(current, false);
@@ -207,12 +210,10 @@
 
       // ─── 화살표 클릭 ─────────────────────────────────────
       document.getElementById('bannerPrev').addEventListener('click', () => {
-        goTo(current - 1);
-        resetTimer();
+        if (!isAnimating) { goTo(current - 1); resetTimer(); }
       });
       document.getElementById('bannerNext').addEventListener('click', () => {
-        goTo(current + 1);
-        resetTimer();
+        if (!isAnimating) { goTo(current + 1); resetTimer(); }
       });
     })();
   </script>
